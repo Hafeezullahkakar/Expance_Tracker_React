@@ -1,11 +1,17 @@
-import React from 'react'
-
+import React,{useContext} from 'react'
+import { Global} from '../App'
 export const History = () => {
+    const {transactions} = useContext(Global)
     return (
-        <div>
-              <div>Cash</div> <div>+500</div>
-            <div>Book</div>   <div>-40</div>
-            <div>Camera</div> <div>-200</div>
+        <div className = 'history-wrapper'>
+            <div className = 'history'>history</div>
+                    {transactions.map(t=>{
+                        return  (
+                         <div className ='item' key ={t.id}>
+                             <div>{t.text}</div>
+                         <div>{t.amount}</div>
+                         </div>)})}     
         </div>
     )
 }
+export default History
