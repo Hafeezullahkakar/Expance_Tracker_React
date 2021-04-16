@@ -109,3 +109,7 @@ button{
   border-radius: 5px;
   cursor: pointer;
 }
+button:hover{
+  color: rgb(0, 0, 0);
+  background: white;
+}

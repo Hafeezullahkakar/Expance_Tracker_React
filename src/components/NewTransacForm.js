@@ -2,15 +2,21 @@ import React,{useState, useContext} from 'react'
 import{ Global }from '../App'
 export const NewTransacForm = () => {
     const[text, setText] = useState('')
-    const[amount, setAmount] = useState(0)
-    const {transactions }= useContext(Global)
-      const handleSubmit=(e)=>{
-        e.preventDefault();
-       transactions.push(amount)
+    const[amount, setAmount] = useState(0)   
+    const {addTransaction} = useContext(Global)
+
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+       const newTrasaction={
+           id: Math.floor(Math.random()*100000000),
+           text,
+           amount: +amount
+       }
+       addTransaction(newTrasaction)
     }
     return (
         <div>
-            <form onSubmit = {handleSubmit}>
+            <form onSubmit = {handleSubmit} >
                 <h3>Add new transaction</h3>
                 <div className = 'inputpluslabels'>
                 <label htmlFor='text' >Text</label>

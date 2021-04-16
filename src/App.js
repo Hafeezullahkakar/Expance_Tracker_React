@@ -9,31 +9,43 @@ export const Global = React.createContext();
 
 const initialState = {
   transcations :[
-      {id: 1, text: 'Flower' , amount : -20},
-      {id: 2, text: 'Flower' , amount : 120}
+      {id: 1, text: 'Flower' , amount : -20}     
      ]
   }
 const reducer= (state, action) =>{
       switch(action.type){
-          // case 'Add_Transaction':
-          //     if(state > 0){
-          //             return initialState + state
-          //         }
-          //         else{
-          //                 return initialState - state
-          //             }
+          case 'Delete_Transaction':
+            return {
+              ...state, 
+              transcations: state.transcations.filter(transaction => transaction.id !== action.payload)
+            }
+         case 'Add_Transaction':
+              return{
+                ...state,
+                transcations: [action.payload, ...state.transcations]
+              }
                   default :
                   return state;
               }
               
           }
 
+
 function App() {
   const [state, dispatch] =useReducer(reducer, initialState)
-   
+  function deleteTransaction(id){
+    dispatch({
+      type : 'Delete_Transaction',
+      payload : id
+    })}   
+  function addTransaction(transaction){
+    dispatch({
+      type: 'Add_Transaction',
+      payload : transaction
+    })
+  }
   return (
-
- <Global.Provider value = {{transactions : state.transcations ,  dispatch}}>    
+ <Global.Provider value = {{transactions : state.transcations , deleteTransaction, addTransaction}}>    
     <div className = 'App'>
         <Header />
         <Balance />

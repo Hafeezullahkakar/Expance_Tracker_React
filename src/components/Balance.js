@@ -5,8 +5,7 @@ export const Balance = () => {
        
         const TotalAmount=  transactions.map(t=> t.amount)
         const amont = TotalAmount.reduce((account , item)=> (account += item))
-        console.log(amont)
-        
+           
     return (
         <div className = 'balance'>    
             <div>YOUR BALANCE </div>
